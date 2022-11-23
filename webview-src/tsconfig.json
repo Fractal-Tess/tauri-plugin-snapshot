@@ -5,6 +5,7 @@
     "allowJs": true,
     "esModuleInterop": true,
     "baseUrl": ".",
+    "lib": ["ES2015", "DOM"],
     "paths": {
       "types": ["@types"]
     },
