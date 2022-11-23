@@ -17,9 +17,6 @@ pub enum Error {
     #[error(transparent)]
     Surface(#[from] webkit2gtk::Error),
 
-    #[error("the data for key `{0}` is not available")]
-    ToImageSurface(String),
-
     #[error(transparent)]
     CairoIo(#[from] cairo::IoError),
 }

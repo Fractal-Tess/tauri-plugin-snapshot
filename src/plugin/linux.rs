@@ -44,7 +44,7 @@ pub fn snapshot(
                 Ok(surface) => surface,
                 Err(_) => {
                     // TODO: Do i care about this result?
-                    tx.send(Err(Error::ToImageSurface(
+                    tx.send(Err(Error::Other(
                         "Cannot convert Surface to ImageSurface".to_string(),
                     )));
                     return;
