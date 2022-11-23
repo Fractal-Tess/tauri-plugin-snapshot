@@ -31,9 +31,9 @@ pub fn snapshot(window: Window, options: Options) -> Result<Vec<u8>> {
             #[cfg(target_os = "macos")]
             macos::snapshot(webview, region, capture, tx);
         })
-        .map_err(|err| Error::WebView(err))?;
+        .map_err(|error| Error::WebView(error))?;
 
-    let png_buffer = rx.recv().map_err(|err| Error::Threading(err))??;
+    let png_buffer = rx.recv().map_err(|error| Error::Threading(error))??;
 
     if let Some(save) = save {
         save_to_disk(save, &png_buffer)?;
