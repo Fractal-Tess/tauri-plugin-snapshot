@@ -8,6 +8,8 @@ rust-version = "1.59"
 exclude = ["/examples", "/webview-dist", "/webview-src", "node_modules"]
 
 [dependencies]
-tauri = { version = "1.2.0" }
+tauri = { version = "1.2.0" , features =["wry"]}
 serde = "1.0"
 thiserror = "1.0"
+webkit2gtk = "0.18.2"
+cairo-rs={version="0.15.1", features=["png"]}

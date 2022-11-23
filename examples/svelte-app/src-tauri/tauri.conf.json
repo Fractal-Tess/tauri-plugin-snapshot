@@ -2,8 +2,8 @@
   "build": {
     "distDir": "../public",
     "devPath": "http://localhost:8080",
-    "beforeDevCommand": "yarn dev",
-    "beforeBuildCommand": "yarn build"
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build"
   },
   "tauri": {
     "bundle": {
