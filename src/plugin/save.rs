@@ -5,7 +5,7 @@ use super::types::SaveOptions;
 use crate::prelude::*;
 
 // TODO: Error handling
-pub fn save_to_disk(save_options: SaveOptions, buffer: &Vec<u8>) -> Result<()> {
+pub fn save_to_disk(save_options: SaveOptions, buffer: &[u8]) -> Result<()> {
     if save_options.path.as_os_str().is_empty() {
         return Err(Error::Other("Path cannot be empty".to_string()));
     }
@@ -15,14 +15,8 @@ pub fn save_to_disk(save_options: SaveOptions, buffer: &Vec<u8>) -> Result<()> {
             .write(true)
             .create_new(true)
             .open(&save_options.path),
-    }
-    .map_err(|error| Error::Io(error))?;
+    }?;
 
-    file.write_all(buffer).map_err(|_| {
-        Error::Other(format!(
-            "Unable to write to file. Path: {:?}",
-            save_options.path
-        ))
-    })?;
+    file.write_all(buffer)?;
     Ok(())
 }

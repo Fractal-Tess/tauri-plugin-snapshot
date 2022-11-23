@@ -14,7 +14,7 @@ pub fn snapshot(
     // TODO: On linux, it is not possible to capture an area
     // If the other webviews do not support this, remove the `area` variant
     let region = match region {
-        Some(Region::DOCUMENT) => SnapshotRegion::FullDocument,
+        Some(Region::Document) => SnapshotRegion::FullDocument,
         _ => SnapshotRegion::Visible,
     };
     let mut snapshot_options = SnapshotOptions::empty();
@@ -35,16 +35,14 @@ pub fn snapshot(
             let surface = match surface {
                 Ok(surface) => surface,
                 Err(error) => {
-                    // TODO: Do i care about this result?
-                    tx.send(Err(Error::Surface(error)));
+                    let _ = tx.send(Err(Error::Surface(error)));
                     return;
                 }
             };
             let image_surface = match ImageSurface::try_from(surface) {
                 Ok(surface) => surface,
                 Err(_) => {
-                    // TODO: Do i care about this result?
-                    tx.send(Err(Error::Other(
+                    let _ = tx.send(Err(Error::Other(
                         "Cannot convert Surface to ImageSurface".to_string(),
                     )));
                     return;
@@ -56,13 +54,11 @@ pub fn snapshot(
             match image_surface.write_to_png(&mut buffer) {
                 Ok(_) => {}
                 Err(error) => {
-                    // TODO: Do i care about this result?
-                    tx.send(Err(Error::CairoIo(error)));
+                    let _ = tx.send(Err(Error::CairoIo(error)));
                     return;
                 }
             };
-            // TODO: Do i care about this result?
-            tx.send(Ok(buffer));
+            let _ = tx.send(Ok(buffer));
         },
     );
 }

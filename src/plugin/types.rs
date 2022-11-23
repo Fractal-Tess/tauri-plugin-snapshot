@@ -5,9 +5,9 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Region {
-    DOCUMENT,
-    VIEWPORT,
-    AREA {
+    Document,
+    Viewport,
+    Area {
         x: u32,
         y: u32,
         width: u32,

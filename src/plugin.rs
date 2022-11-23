@@ -20,20 +20,18 @@ pub fn snapshot(window: Window, options: Options) -> Result<Vec<u8>> {
         save,
     } = options;
 
-    window
-        .with_webview(|webview| {
-            #[cfg(target_os = "linux")]
-            linux::snapshot(webview, region, capture, tx);
+    window.with_webview(|webview| {
+        #[cfg(target_os = "linux")]
+        linux::snapshot(webview, region, capture, tx);
 
-            #[cfg(target_os = "windows")]
-            windows::snapshot(webview, region, capture, tx);
+        #[cfg(target_os = "windows")]
+        windows::snapshot(webview, region, capture, tx);
 
-            #[cfg(target_os = "macos")]
-            macos::snapshot(webview, region, capture, tx);
-        })
-        .map_err(|error| Error::WebView(error))?;
+        #[cfg(target_os = "macos")]
+        macos::snapshot(webview, region, capture, tx);
+    })?;
 
-    let png_buffer = rx.recv().map_err(|error| Error::Threading(error))??;
+    let png_buffer = rx.recv()??;
 
     if let Some(save) = save {
         save_to_disk(save, &png_buffer)?;
