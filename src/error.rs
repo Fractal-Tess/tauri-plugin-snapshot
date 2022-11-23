@@ -1,10 +1,27 @@
-use crate::prelude::*;
 use serde::{Serialize, Serializer};
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
-    #[error("Unable to write to disk")]
+    #[error("{0}")]
+    Other(String),
+
+    #[error(transparent)]
     Io(#[from] std::io::Error),
+
+    #[error(transparent)]
+    WebView(#[from] tauri::Error),
+
+    #[error(transparent)]
+    Threading(#[from] std::sync::mpsc::RecvError),
+
+    #[error(transparent)]
+    Surface(#[from] webkit2gtk::Error),
+
+    #[error("the data for key `{0}` is not available")]
+    ToImageSurface(String),
+
+    #[error(transparent)]
+    CairoIo(#[from] cairo::IoError),
 }
 
 impl Serialize for Error {

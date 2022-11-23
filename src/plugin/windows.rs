@@ -1,9 +1,16 @@
+#![allow(unused)]
 use std::sync::mpsc::Sender;
 
-use cairo::ImageSurface;
 use tauri::window::PlatformWebview;
-use webkit2gtk::SnapshotOptions;
 
-pub fn snapshot(webview: PlatformWebview, tx: Sender<Vec<u8>>) {
-    tx.send(vec![]);
+use super::types::{CaptureOptions, Region};
+use crate::prelude::*;
+
+pub fn snapshot(
+    webview: PlatformWebview,
+    region: Option<Region>,
+    capture_options: Option<CaptureOptions>,
+    tx: Sender<Result<Vec<u8>>>,
+) {
+    todo!();
 }

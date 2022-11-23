@@ -1,24 +1,55 @@
 <script lang="ts">
-  import { snapshotViewport } from 'tauri-plugin-screen-shot-api';
+  import {
+    snapshotArea,
+    snapshotDocument,
+    snapshotViewport,
+  } from 'tauri-plugin-screen-shot-api';
 
   let response = '';
   let img: HTMLImageElement;
+  let savePath: HTMLInputElement;
 
-  function updateResponse(returnValue) {
-    response +=
-      `[${new Date().toLocaleTimeString()}]` +
-      (typeof returnValue === 'string'
-        ? returnValue
-        : JSON.stringify(returnValue)) +
-      '<br>';
+  async function area() {
+    const typedArray = await snapshotArea({
+      x: 10,
+      y: 10,
+      width: 20,
+      height: 20,
+    });
+    const imgBlob = new Blob([typedArray], { type: 'image/png' });
+    const imageUrl = window.webkitURL.createObjectURL(imgBlob);
+    img.src = imageUrl;
   }
 
-  async function _execute() {
+  async function view() {
     const typedArray = await snapshotViewport({
-      capture: { highlighted: true },
-      path: 'Path',
+      capture: {
+        highlighted: true,
+        transparentBackground: false,
+      },
     });
-    console.log(typedArray);
+    const imgBlob = new Blob([typedArray], { type: 'image/png' });
+    const imageUrl = window.webkitURL.createObjectURL(imgBlob);
+    img.src = imageUrl;
+  }
+  async function doc() {
+    const typedArray = await snapshotDocument();
+    const imgBlob = new Blob([typedArray], { type: 'image/png' });
+    const imageUrl = window.webkitURL.createObjectURL(imgBlob);
+    img.src = imageUrl;
+  }
+  async function docWithSavePath() {
+    if (!savePath.value) {
+      alert('save path cannot be empty');
+      // return
+    }
+
+    const typedArray = await snapshotDocument({
+      save: {
+        path: savePath.value,
+        overwrite: false,
+      },
+    });
     const imgBlob = new Blob([typedArray], { type: 'image/png' });
     const imageUrl = window.webkitURL.createObjectURL(imgBlob);
     img.src = imageUrl;
@@ -26,7 +57,13 @@
 </script>
 
 <div>
-  <button on:click={_execute}>Execute</button>
+  <input bind:this={savePath} type="text" placeholder="save path" />
+</div>
+<div>
+  <button on:click={area}>Area</button>
+  <button on:click={view}>Viewport</button>
+  <button on:click={doc}>Document</button>
+  <button on:click={docWithSavePath}>Document & SavePath</button>
   <div>{@html response}</div>
 </div>
 <img

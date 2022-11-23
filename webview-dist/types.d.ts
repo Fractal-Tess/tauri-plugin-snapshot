@@ -5,7 +5,10 @@ export declare type Area = {
     height: number;
 };
 export declare type Options = {
-    path?: string;
+    save?: {
+        path: string;
+        overwrite?: boolean;
+    };
     capture?: RequireAtLeastOne<{
         transparentBackground: boolean;
         highlighted: boolean;

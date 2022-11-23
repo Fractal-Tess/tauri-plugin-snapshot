@@ -1,50 +1,43 @@
 mod linux;
 mod macos;
+mod save;
+mod types;
 mod windows;
 
 use crate::prelude::*;
-use cairo::ImageSurface;
-use serde::{Deserialize, Serialize};
-use std::{path::PathBuf, sync::mpsc::channel};
+use std::sync::mpsc::channel;
 use tauri::{command, Window};
-use webkit2gtk::{SnapshotOptions, WebViewExt};
+use types::Options;
 
-#[derive(Debug, Deserialize)]
-struct Area {
-    x: u32,
-    y: u32,
-    width: u32,
-    height: u32,
-}
+use self::save::save_to_disk;
 
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct Capture {
-    transparent_background: Option<bool>,
-    highlighted: Option<bool>,
-}
-
-#[derive(Debug, Deserialize)]
-pub struct Options {
-    area: Option<Area>,
-    path: Option<PathBuf>,
-    capture: Option<Capture>,
-}
-
-#[command]
-pub async fn snapshot(window: Window, options: Options) -> Result<Vec<u8>> {
-    println!("{:?}", options);
+#[command(async)]
+pub fn snapshot(window: Window, options: Options) -> Result<Vec<u8>> {
     let (tx, rx) = channel::<Result<Vec<u8>>>();
+    let Options {
+        region,
+        capture,
+        save,
+    } = options;
+
     window
         .with_webview(|webview| {
             #[cfg(target_os = "linux")]
-            linux::snapshot(webview, tx);
+            linux::snapshot(webview, region, capture, tx);
+
             #[cfg(target_os = "windows")]
-            windows::snapshot(webview, tx);
+            windows::snapshot(webview, region, capture, tx);
+
             #[cfg(target_os = "macos")]
-            macos::snapshot(webview, tx);
+            macos::snapshot(webview, region, capture, tx);
         })
-        .unwrap();
-    let data = rx.recv().unwrap().unwrap();
-    Ok(data)
+        .map_err(|err| Error::WebView(err))?;
+
+    let png_buffer = rx.recv().map_err(|err| Error::Threading(err))??;
+
+    if let Some(save) = save {
+        save_to_disk(save, &png_buffer)?;
+    };
+
+    Ok(png_buffer)
 }

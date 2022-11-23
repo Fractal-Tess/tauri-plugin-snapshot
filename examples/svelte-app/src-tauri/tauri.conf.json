@@ -32,7 +32,7 @@
       }
     },
     "allowlist": {
-      "all": false
+      "all": true
     },
     "windows": [
       {
