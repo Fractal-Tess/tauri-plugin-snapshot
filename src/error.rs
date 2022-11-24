@@ -14,9 +14,11 @@ pub enum Error {
     #[error(transparent)]
     Threading(#[from] std::sync::mpsc::RecvError),
 
+    #[cfg(target_os = "linux")]
     #[error(transparent)]
     Surface(#[from] webkit2gtk::Error),
 
+    #[cfg(target_os = "linux")]
     #[error(transparent)]
     CairoIo(#[from] cairo::IoError),
 }
