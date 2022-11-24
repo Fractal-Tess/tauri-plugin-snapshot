@@ -1,22 +1,29 @@
 [package]
 name = "tauri-plugin-screen-shot"
-version = "0.0.0"
+version = "0.1.0"
 authors = [ "You" ]
 description = ""
 edition = "2021"
 rust-version = "1.59"
-exclude = ["/examples", "/webview-dist", "/webview-src", "node_modules"]
+exclude = [ "/examples", "/webview-dist", "/webview-src", "node_modules" ]
 
 [dependencies]
-tauri = { version = "1.0.0" , features =["wry"]}
+tauri = { version = "1.0.0", features = [ "wry" ] }
 serde = "1.0"
 thiserror = "1.0"
 
-
-[target.'cfg(target_os = "linux")'.dependencies]
+[target."cfg(target_os = \"linux\")".dependencies]
 webkit2gtk = "0.18.2"
-cairo-rs={version="0.15.1", features=["png"]}
+cairo-rs = { version = "0.15.1", features = [ "png" ] }
 
-[target.'cfg(target_os = "windows")'.dependencies]
-webview2-com={version="0.19.1"}
-windows={version="0.39", features=["Win32_System_Com", "Graphics_Imaging" ,"Storage_Streams","Win32_Media_DirectShow", "Win32_Media_Multimedia", "Storage_Streams", "Web_UI"]}
+[target."cfg(target_os = \"windows\")".dependencies]
+webview2-com = { version = "0.19.1" }
+windows = { version = "0.39", features = [
+  "Win32_System_Com",
+  "Graphics_Imaging",
+  "Storage_Streams",
+  "Win32_Media_DirectShow",
+  "Win32_Media_Multimedia",
+  "Storage_Streams",
+  "Web_UI"
+] }
