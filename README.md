@@ -4,6 +4,8 @@
 
 This plugin provides an easy to use `rust` and `javascript` APIs for capturing snapshots of the webview window.
 
+## **DISCLAIMER: This plugin is missing a MacOS implementation!!!**
+
 ## Architecture
 
 This repo shape might appear to be strange, but it is really just a hybrid Rust / Typescript project that recommends a specific type of consumption, namely using GIT as the secure distribution mechanism, and referencing specific unforgeable git hashes. Of course, it can also be consumed via Cargo and NPM.
