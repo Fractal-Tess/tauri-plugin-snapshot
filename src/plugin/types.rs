@@ -7,12 +7,6 @@ use serde::Deserialize;
 pub enum Region {
     Document,
     Viewport,
-    Area {
-        x: u32,
-        y: u32,
-        width: u32,
-        height: u32,
-    },
 }
 
 #[derive(Debug, Deserialize, Default)]

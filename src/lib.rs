@@ -7,10 +7,10 @@ use tauri::{
     Wry,
 };
 
-use plugin::snapshot;
+pub use plugin::*;
 
 pub fn init() -> TauriPlugin<Wry> {
-    Builder::new("screen-shot")
+    Builder::new("snapshot")
         .invoke_handler(tauri::generate_handler![snapshot])
         .build()
 }

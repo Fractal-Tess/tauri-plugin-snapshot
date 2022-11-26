@@ -1,9 +1,13 @@
 {
-  "name": "tauri-plugin-screen-shot-api",
+  "name": "tauri-plugin-snapshot-api",
   "version": "0.1.0",
-  "author": "You",
-  "description": "",
+  "authors": [
+    "Fractal-Tess",
+    "FabianLars"
+  ],
+  "description": "A Tauri plugin for easily capturing screenshots of the webview",
   "browser": "webview-dist/index.js",
+  "license": "MIT",
   "main": "webview-dist/index.js",
   "types": "webview-dist/index.d.ts",
   "scripts": {

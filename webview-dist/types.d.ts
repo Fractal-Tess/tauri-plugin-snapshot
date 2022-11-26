@@ -1,9 +1,3 @@
-export declare type Area = {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-};
 export declare type Options = {
     save?: {
         path: string;

@@ -1,18 +1,8 @@
 import { invoke } from '@tauri-apps/api/tauri';
-import type { Area, Options } from './types';
+import type { Options } from './types';
 
-export async function snapshotArea(area: Area, options: Options = {}) {
-  const data = await invoke<number[]>('plugin:screen-shot|snapshot', {
-    options: {
-      ...options,
-      region: { area },
-    },
-  });
-  const typedArray = new Uint8Array(data);
-  return typedArray;
-}
 export async function snapshotViewport(options: Options = {}) {
-  const data = await invoke<number[]>('plugin:screen-shot|snapshot', {
+  const data = await invoke<number[]>('plugin:snapshot|snapshot', {
     options: {
       ...options,
       region: 'viewport',
@@ -22,7 +12,7 @@ export async function snapshotViewport(options: Options = {}) {
   return typedArray;
 }
 export async function snapshotDocument(options?: Options) {
-  const data = await invoke<number[]>('plugin:screen-shot|snapshot', {
+  const data = await invoke<number[]>('plugin:snapshot|snapshot', {
     options: {
       ...options,
       region: 'document',

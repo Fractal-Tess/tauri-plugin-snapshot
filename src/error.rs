@@ -14,6 +14,10 @@ pub enum Error {
     #[error(transparent)]
     Threading(#[from] std::sync::mpsc::RecvError),
 
+    #[cfg(target_os = "windows")]
+    #[error(transparent)]
+    Windows(#[from] windows::core::Error),
+
     #[cfg(target_os = "linux")]
     #[error(transparent)]
     Surface(#[from] webkit2gtk::Error),

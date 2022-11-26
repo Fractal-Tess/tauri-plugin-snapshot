@@ -1,10 +1,3 @@
-export type Area = {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-};
-
 export type Options = {
   save?: {
     path: string;

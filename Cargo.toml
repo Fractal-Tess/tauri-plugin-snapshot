@@ -1,8 +1,9 @@
 [package]
-name = "tauri-plugin-screen-shot"
+name = "tauri-plugin-snapshot"
 version = "0.1.0"
-authors = [ "You" ]
-description = ""
+authors = [ "Fractal-Tess", "FabianLars" ]
+description = "A Tauri plugin for easily capturing screenshots of the webview"
+license = "MIT"
 edition = "2021"
 rust-version = "1.59"
 exclude = [ "/examples", "/webview-dist", "/webview-src", "node_modules" ]
@@ -16,14 +17,6 @@ thiserror = "1.0"
 webkit2gtk = "0.18.2"
 cairo-rs = { version = "0.15.1", features = [ "png" ] }
 
-[target."cfg(target_os = \"windows\")".dependencies]
-webview2-com = { version = "0.19.1" }
-windows = { version = "0.39", features = [
-  "Win32_System_Com",
-  "Graphics_Imaging",
-  "Storage_Streams",
-  "Win32_Media_DirectShow",
-  "Win32_Media_Multimedia",
-  "Storage_Streams",
-  "Web_UI"
-] }
+[target.'cfg(target_os = "windows")'.dependencies]
+webview2-com={version="0.19.1"}
+windows={version="0.39", features=["Win32_UI_Shell","Win32_System_Com"]}
