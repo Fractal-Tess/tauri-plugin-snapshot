@@ -39,7 +39,7 @@ Please note, below in the dependencies you can also lock to a revision/tag in bo
 `src-tauri/Cargo.toml`
 
 ```yaml
-[dependencies.tauri-plugin-sql]
+[dependencies.tauri-plugin-snapshot]
 git = "https://github.com/Fractal-Tess/tauri-plugin-snapshot"
 # tag = "v0.1.0" Not available yet
 ```
@@ -69,8 +69,7 @@ npm install github:/Fractal-Tess/tauri-plugin-snapshot#v0.1.0
 `Install from a commit`
 
 ```sh
-# TODO:Add this later
-# npm install github:tauri-apps/tauri-plugin-sql#488558717b77d8a2bcb37acfd2eca9658aeadc8e
+npm install github:tauri-apps/tauri-plugin-snapshot#6e1a65a47f8dc89e97472c191ea57a0bbe489b7b
 ```
 
 `Install from a branch (dev)`
@@ -83,7 +82,9 @@ npm install github:Fractal-Tess/tauri-plugin-snapshot#dev
 
 ```json
   "dependencies": {
-    "tauri-plugin-sql-api": " github:Fractal-Tess/tauri-plugin-snapshot",
+    "tauri-plugin-snapshot-api": " github:Fractal-Tess/tauri-plugin-snapshot",
+    ...
+  }
 ```
 
 ### Examples

@@ -2,7 +2,7 @@
 name = "tauri-plugin-snapshot"
 version = "0.1.0"
 authors = [ "Fractal-Tess", "FabianLars" ]
-description = "A Tauri plugin for easily capturing screenshots of the webview"
+description = "A Tauri plugin for easily capturing snapshots of the webview"
 license = "MIT"
 edition = "2021"
 rust-version = "1.59"
