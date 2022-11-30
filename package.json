@@ -5,6 +5,13 @@
     "Fractal-Tess",
     "FabianLars"
   ],
+  "private": false,
+  "keywords": [
+    "tauri",
+    "snapshot",
+    "screenshot",
+    "plugin"
+  ],
   "description": "A Tauri plugin for easily capturing snapshots of the webview",
   "browser": "webview-dist/index.js",
   "license": "MIT",
