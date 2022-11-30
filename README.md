@@ -69,7 +69,7 @@ npm install github:/Fractal-Tess/tauri-plugin-snapshot#v0.1.0
 `Install from a commit`
 
 ```sh
-npm install github:tauri-apps/tauri-plugin-snapshot#6e1a65a47f8dc89e97472c191ea57a0bbe489b7b
+npm install github:Fractal-Tess/tauri-plugin-snapshot#a62b3804ba9cf678c08099789ea32fa4ba467ac4
 ```
 
 `Install from a branch (dev)`
