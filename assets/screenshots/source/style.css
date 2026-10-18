@@ -1,0 +1,11 @@
+html,body{margin:0;overflow:hidden}
+body{position:relative;
+  background:
+    radial-gradient(900px 640px at 85% -10%, rgba(30,184,84,.30), transparent 70%),
+    #05110a}
+body::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.4px);background-size:22px 22px;mask-image:linear-gradient(180deg,#000,rgba(0,0,0,.25))}
+.win{position:absolute;border-radius:14px;overflow:hidden;background:#1e1e1e;box-shadow:0 40px 90px -20px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.10)}
+.bar{height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#2a2a2a;border-bottom:1px solid #151515;color:#9aa19c;font:500 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace}
+.bar i{width:11px;height:11px;border-radius:50%;background:#4a4a4a;display:block}
+.bar span{margin-left:12px}
+.win img{display:block;width:100%}
